@@ -1,0 +1,3 @@
+This app keeps nothing in localStorage: it holds a bundled guide set and exports files.
+There is no failed save to test. tests/failed-save.js asserts that NOTHING is written while it clicks
+every button on the page, which is the check that makes this declaration meaningful rather than an excuse.
