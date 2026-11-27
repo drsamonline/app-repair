@@ -1,82 +1,91 @@
 <!DOCTYPE html>
 <html lang="en-IN">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Repair — guides and parts for your model</title>
-<meta name="description" content="Find the right-to-repair guide and the part for your exact model, with a verdict on every guide.">
-<meta name="theme-color" content="#22301f">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repair — the manual for your model</title>
+<meta name="description" content="Guides and parts for your exact model, with a verdict on every guide. Mains appliances are marked not a home repair.">
+<meta name="theme-color" content="#f2f0e6">
 <style>
-  :root{--bg:#f6f5f2;--panel:#fff;--ink:#1c241a;--muted:#5f6a5b;--line:#d9d6cf;--accent:#22301f}
+  :root{--paper:#f2f0e6;--ink:#20241f;--olive:#3f4a37;--rust:#9a5a34;--rule:#c6c8b6;--grey:#6c7264;
+        --sans:"Helvetica Neue",Arial,system-ui,sans-serif;--mono:ui-monospace,Menlo,Consolas,monospace;
+        --s0:clamp(11px,.4vw + 10px,12.5px);--s1:clamp(14px,.6vw + 12px,16px);--s2:clamp(18px,1.3vw + 14px,26px);
+        --display:clamp(34px,6vw,76px);--gut:clamp(16px,3.6vw,60px)}
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif}
-  main{max-width:760px;margin:0 auto;padding:50px 20px 64px}
-  h1{font-size:33px;line-height:1.15;letter-spacing:-.02em;margin:0 0 10px}
-  .lede{font-size:18px;color:var(--muted);margin:0 0 26px}
-  .cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;padding:12px 20px;border-radius:9px}
-  .status{margin:26px 0;padding:14px 16px;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:9px;background:var(--panel);font-size:14px}
-  .status b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
-  h2{font-size:17px;margin:30px 0 8px}
-  ul{padding-left:20px}li{margin:4px 0}
-  code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;background:#eeede9;padding:1px 5px;border-radius:4px}
-  table{border-collapse:collapse;width:100%;font-size:14px;margin-top:8px}
-  th,td{text-align:left;border-bottom:1px solid var(--line);padding:7px 8px;vertical-align:top}
-  th{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em}
-  .warn{margin:22px 0 0;padding:12px 14px;border:1px solid #e3c9c9;border-left:4px solid #8f2a2a;border-radius:9px;background:#fdf3f3;color:#7d1f1f;font-size:13.5px}
-  footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
-  a{color:var(--accent)}
+  body{margin:0;background:#e3e1d4;color:var(--ink);font-family:var(--sans)}
+  .manual{max-width:1680px;margin:0 auto;background:var(--paper);padding:0 0 60px}
+  .strip{background:var(--olive);color:#f2f0e6;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+         padding:9px var(--gut);font-family:var(--mono);font-size:var(--s0);letter-spacing:.14em;text-transform:uppercase}
+  .strip b{color:#e8c98a;font-weight:400}
+  .head{display:grid;gap:clamp(16px,2.4vw,40px);padding:clamp(22px,3.4vw,52px) var(--gut) clamp(16px,2vw,26px);grid-template-columns:1fr}
+  @media (min-width:1000px){.head{grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr)}}
+  h1{font-size:var(--display);line-height:.94;margin:0;letter-spacing:-.03em;font-weight:800;text-transform:uppercase}
+  .head p{margin:12px 0 0;font-size:var(--s2);line-height:1.4;color:var(--grey);max-width:40ch}
+  .mains{border:2px solid var(--rust);padding:12px 14px;font-size:var(--s1);line-height:1.6;color:#7d4023;align-self:start}
+  .mains b{display:block;font-family:var(--mono);font-size:var(--s0);letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px}
+  /* the exploded parts board: 1 col -> 2 -> 4 */
+  .board{display:grid;gap:clamp(10px,1.3vw,18px);padding:0 var(--gut) clamp(18px,2.6vw,34px);grid-template-columns:1fr}
+  @media (min-width:620px){.board{grid-template-columns:repeat(2,1fr)}}
+  @media (min-width:1200px){.board{grid-template-columns:repeat(4,1fr)}}
+  .part{border:1px solid var(--rule);background:#faf8ee;padding:clamp(12px,1.4vw,18px);position:relative}
+  .part .no{position:absolute;top:8px;right:10px;font-family:var(--mono);font-size:var(--s0);color:var(--rule)}
+  .part .v{font-family:var(--mono);font-size:var(--s0);letter-spacing:.12em;text-transform:uppercase;color:var(--olive)}
+  .part .t{font-size:var(--s1);margin:6px 0 0;font-weight:600}
+  .part .n{font-size:var(--s0);color:var(--grey);margin-top:4px;line-height:1.5}
+  .part.careful{border-left:3px solid #b8862f}
+  .part.mains{border-left:3px solid var(--rust);background:#fbf1ea}
+  .cols{display:grid;gap:clamp(18px,2.6vw,46px);padding:0 var(--gut);grid-template-columns:1fr}
+  @media (min-width:860px){.cols{grid-template-columns:repeat(2,1fr)}}
+  @media (min-width:1360px){.cols{grid-template-columns:repeat(3,1fr)}}
+  h2{font-family:var(--mono);font-size:var(--s0);letter-spacing:.16em;text-transform:uppercase;color:var(--rust);margin:0 0 6px}
+  p{font-size:var(--s1);line-height:1.72;margin:0 0 12px}
+  .go{display:inline-block;background:var(--olive);color:#f2f0e6;text-decoration:none;padding:12px 22px;
+      font-family:var(--mono);font-size:var(--s0);letter-spacing:.14em;text-transform:uppercase;margin-top:6px}
+  .go:hover{background:var(--rust)}
+  .sponsor{margin:clamp(22px,3vw,38px) var(--gut) 0;border:1px solid var(--rule);border-left:3px solid var(--rust);
+           background:#faf8ee;padding:12px 14px;font-size:var(--s0);color:var(--grey);line-height:1.6}
+  .sponsor a{color:var(--rust);text-decoration:none;border-bottom:1px solid currentColor}
+  .foot{margin:14px var(--gut) 0;font-family:var(--mono);font-size:var(--s0);color:#8a9080;line-height:1.8}
+  .foot a{color:var(--olive)}
 </style></head>
-<body><main>
-  <h1>Repair</h1>
-  <p class="lede">Right-to-repair guides and part sources for your appliance — <strong>for your exact model</strong>, with a verdict on every guide.</p>
-  <a class="cta" href="play/index.html">Open Repair</a>
+<body><div class="manual">
+  <div class="strip"><span>right to repair · exact model only</span><span><b>3</b> verdicts · <b>0</b> diagnoses</span></div>
 
-  <p class="warn">A mains-powered appliance marked <strong>not a home repair</strong> is not a challenge; it is a warning. The app does not diagnose a fault it cannot see, and a guide for a neighbouring model is a guide for a different machine.</p>
-
-  <div class="status">
-    <b>Status</b>
-    Built and working: model search that matches exactly and names a neighbouring model as a near miss rather than offering its guides; symptom search that returns guides across models and names each one; a three-verdict scale on every guide; mains appliances marked not a home repair with the reason and no steps; and parts listed against a model, never a family.
-    <br><b>Release</b>: Windows EXE, Android APK and Linux binary, built from this source in CI — <a href="https://github.com/drsamonline/app-repair/releases/tag/app-latest">app-latest</a>.
-    <br><b>Not built</b>: a full guide library. The set is five appliances and ten guides — a demonstration of the structure, and every guide says what it is.
+  <div class="head">
+    <div>
+      <h1>Repair</h1>
+      <p>The guide for <em>your</em> model — and a straight answer when the answer is do not open it.</p>
+    </div>
+    <div class="mains"><b>not a home repair</b>A microwave stores high voltage after it is unplugged. That guide carries the reason and no steps.</div>
   </div>
 
-  <h2>The three verdicts</h2>
-  <table>
-    <tr><th>Verdict</th><th>What it means</th></tr>
-    <tr><td><strong>home repair</strong></td><td>You can do this with ordinary tools.</td></tr>
-    <tr><td><strong>careful</strong></td><td>Doable, but a step will ruin it if you rush.</td></tr>
-    <tr><td><strong>not a home repair</strong></td><td>Mains, sealed or gas. Do not open it — and the guide offers no steps.</td></tr>
-  </table>
+  <div class="board">
+    <div class="part"><span class="no">01</span><div class="v">home repair</div><div class="t">Replace the coupler</div><div class="n">MIX-450 · 20 min · screwdriver, new coupler</div></div>
+    <div class="part careful"><span class="no">02</span><div class="v">careful</div><div class="t">Change the carbon brushes</div><div class="n">MIX-450 · 35 min · note the brush orientation</div></div>
+    <div class="part"><span class="no">03</span><div class="v">home repair</div><div class="t">Descale the element</div><div class="n">KET-1200 · 15 min · citric acid</div></div>
+    <div class="part mains"><span class="no">04</span><div class="v">not a home repair</div><div class="t">Open the base</div><div class="n">KET-1200 · mains and sealed · no steps</div></div>
+  </div>
 
-  <h2>What it does</h2>
-  <ul>
-    <li>Finds the guides for one exact model, and the parts for that model.</li>
-    <li>Names a neighbouring model as a near miss instead of lending you its guide.</li>
-    <li>Searches by symptom across models, naming the model each guide belongs to.</li>
-    <li>Marks every guide with one of three verdicts, and gives the reason on a mains appliance.</li>
-  </ul>
+  <div class="cols">
+    <div>
+      <h2>Exact model, not family</h2>
+      <p>A guide for a neighbouring model is a guide for a different machine. Search MIX-470 and it names MIX-450 and MIX-460 as different models rather than quietly lending you one of theirs.</p>
+    </div>
+    <div>
+      <h2>No diagnosis</h2>
+      <p>A symptom search returns guides and names the model each belongs to. It never guesses the fault — a fault it cannot see is a fault it will not name.</p>
+    </div>
+    <div>
+      <h2>Get the manual</h2>
+      <p>Five appliances, ten guides, and every one says what it is.</p>
+      <a class="go" href="play/index.html">open the manual →</a>
+    </div>
+  </div>
 
-  <h2>What it will not do</h2>
-  <ul>
-    <li><strong>Diagnose a fault it cannot see.</strong> No symptom guessing, no "probably the capacitor".</li>
-    <li><strong>Encourage you into a mains appliance.</strong> Those guides have a reason and no steps.</li>
-    <li><strong>Return a neighbour's guide as though it were the same.</strong></li>
-    <li><strong>Use the internet.</strong> No <code>fetch</code>, no endpoint; CSP <code>connect-src 'none'</code>.</li>
-  </ul>
-
-  <h2>When things go wrong</h2>
-  <table>
-    <tr><th>Case</th><th>What happens</th></tr>
-    <tr><td>Bad input</td><td>An empty model or symptom search is refused with the field named.</td></tr>
-    <tr><td>No match</td><td>A model with no guide is refused, with any neighbouring models named; an unmatched symptom is refused and no fault is guessed.</td></tr>
-    <tr><td>No network</td><td>Nothing changes; the guide set is bundled.</td></tr>
-    <tr><td>Corrupt saved state</td><td>Reported and offered for export; never replaced with an empty list.</td></tr>
-  </table>
-
-  <h2>How to run it</h2>
-  <ul>
-    <li><strong>Here</strong>: <a href="play/index.html">play/index.html</a>, or install it from your browser's menu.</li>
-    <li><strong>Offline file</strong>: open <code>docs/play/index.html</code> straight from disk.</li>
-    <li><strong>Tests</strong>: <code>node tests/self-tests.js</code>.</li>
-  </ul>
-
-  <footer>PolyForm Noncommercial 1.0.0 · (c) 2026 Dr Sohil Momin · <a href="https://github.com/drsamonline/app-repair">source</a></footer>
-</main></body></html>
+  <div class="sponsor">
+    <strong>Sponsor this app.</strong> Free, offline, no account. If it earned its keep:
+    <a href="https://github.com/sponsors/drsamonline">github.com/sponsors/drsamonline</a>
+  </div>
+  <p class="foot">A starter set, not a service manual — NOTICE says so plainly.<br>
+  Windows · Android · Linux at <a href="https://github.com/drsamonline/app-repair/releases/tag/app-latest">app-latest</a> ·
+  PolyForm Noncommercial 1.0.0 · (c) 2026 Dr Sohil Momin</p>
+</div></body></html>
